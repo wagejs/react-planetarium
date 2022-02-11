@@ -1,10 +1,12 @@
 import styled from "styled-components";
 import { Planet } from "../interfaces/planet";
 import DefaultImagePlanet from "../assets/images/planet-earth.png";
+import { useNavigate } from "react-router-dom";
+import { delimeterThousand } from "../utils/delimeter";
 
 const PlanetCard = styled.div`
   border-radius: 8px;
-  padding: 12px;
+  padding: 24px;
   border: 1px solid #ebebeb;
   cursor: pointer;
   display: flex;
@@ -37,14 +39,9 @@ const TextBold = styled.p`
 `;
 
 function PlanteCard(props: Planet) {
-  function numberWithCommas(x: number) {
-    if (!x) {
-      return "No Civilization";
-    }
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-  }
+  let navigate = useNavigate();
   return (
-    <PlanetCard>
+    <PlanetCard onClick={() => navigate("/planet/" + props.id)}>
       <WrapperFlex>
         <img src={DefaultImagePlanet} alt="default-planet" width="100" />
       </WrapperFlex>
@@ -54,22 +51,14 @@ function PlanteCard(props: Planet) {
           <WrapperFlex>
             <p>Diameter</p>
             <TextBold>
-              {props.diameter ? props.diameter : "Unmeasurable"}
+              {delimeterThousand(props.diameter, "Unmeasurable", "km")}
             </TextBold>
           </WrapperFlex>
           <div>
             <p>Population</p>
-            <TextBold>{numberWithCommas(props.population)}</TextBold>
-          </div>
-        </Flex>
-        <Flex>
-          <WrapperFlex>
-            <p>Gravity</p>
-            <TextBold>{props.gravity}</TextBold>
-          </WrapperFlex>
-          <div className="flex">
-            <p>Climates</p>
-            <TextBold>{props.climates}</TextBold>
+            <TextBold>
+              {delimeterThousand(props.population, "No Civilization", "")}
+            </TextBold>
           </div>
         </Flex>
       </WrapperFlex>

@@ -53,8 +53,6 @@ function Planets() {
               id={planet.id}
               name={planet.name}
               diameter={planet.diameter}
-              gravity={planet.gravity}
-              climates={planet.climates}
               population={planet.population}
             />
           </CardListItem>

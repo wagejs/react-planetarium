@@ -15,3 +15,20 @@ export const LIST_PLANET = gql`
     }
   }
 `
+
+export const DETAIL_PLANET = gql`
+  query getDetailPlanet($id: ID){
+    planet(id: $id){
+      name
+      id
+      gravity
+      rotationPeriod
+      orbitalPeriod
+      population
+      climates
+      terrains
+      surfaceWater
+      edited
+    }
+  }
+`;
