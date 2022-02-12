@@ -2,6 +2,12 @@ import PlanetDetail from "../components/PlanetDetail";
 import { DETAIL_PLANET } from "../api/query";
 import { useQuery } from "@apollo/client";
 import { useParams } from "react-router-dom";
+import { dateFormat } from "../utils/date";
+import styled from "styled-components";
+
+const Container = styled.div`
+  padding: 24px;
+`;
 
 function DetailPlanet() {
   let { id } = useParams();
@@ -10,11 +16,16 @@ function DetailPlanet() {
       id: id,
     },
   });
-  if (loading) return <>Loading...</>;
+  if (loading)
+    return (
+      <Container>
+        <>Loading...</>
+      </Container>
+    );
   if (error) return <>Error! {error.message}</>;
   const detail = data.planet;
   return (
-    <div>
+    <Container>
       <PlanetDetail
         id={detail.id}
         name={detail.name}
@@ -26,9 +37,9 @@ function DetailPlanet() {
         orbitalPeriod={detail.orbitalPeriod}
         terrains={detail.terrains}
         surfaceWater={detail.surfaceWater}
-        edited={detail.edited}
+        edited={dateFormat(detail.edited)}
       />
-    </div>
+    </Container>
   );
 }
 

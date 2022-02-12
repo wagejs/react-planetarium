@@ -7,7 +7,7 @@ import { delimeterThousand } from "../utils/delimeter";
 const PlanetCard = styled.div`
   border-radius: 8px;
   padding: 24px;
-  border: 1px solid #ebebeb;
+  border: 1px solid #e3e3e3;
   cursor: pointer;
   display: flex;
   flex-direction: column;
